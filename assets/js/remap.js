@@ -1,5 +1,4 @@
 window.PDFJS_LOCALE = {
-  pdfJsWorker: '/node_modules/pdfjs-dist/build/',
+  pdfJsWorker: './assets/js/pdf.worker.js',
   pdfJsCMapUrl: '/node_modules/pdfjs-dist/cmaps/'
 };
-window.PDFJS = window.pdfjsLib;
