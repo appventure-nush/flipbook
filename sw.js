@@ -28,7 +28,7 @@ self.addEventListener('install', function (e) {
         "./assets/images/light-loader.gif",
         "./index.html",
         "./node_modules/font-awesome/css/font-awesome.css",
-        "./node_modules/font-awesome/fonts/fontawesome-webfont.woff2"
+        "./node_modules/font-awesome/fonts/fontawesome-webfont.eot"
       ];
       return cache.addAll(cacheArray);
     });
@@ -69,7 +69,7 @@ self.addEventListener('fetch', function (event) {
       caches.open('cache1').then(async function (cache) {
         return cache.match(event.request).then(function (response) {
           const {url} = event.request;
-          if ((url.endsWith(".css") || url.endsWith(".ttf") || url.indexOf("min") > -1 || url.indexOf("io") > -1) && response) {
+          if ((url.endsWith(".css") || url.endsWith(".eot") || url.indexOf("min") > -1 || url.indexOf("io") > -1) && response) {
             return addCacheHeader(response);
           }
           console.log(`Loading ${url}`);
@@ -93,7 +93,7 @@ self.addEventListener('fetch', function (event) {
             .then(networkResponse => {
               if (networkResponse.ok) {
                 // Partial content cannot be cached
-                if(networkResponse.status===206) return networkResponse;
+                if (networkResponse.status === 206) return networkResponse;
                 //Request successful, add to cache
                 cache.put(event.request, networkResponse.clone());
                 console.log(`Cached ${url}`);
