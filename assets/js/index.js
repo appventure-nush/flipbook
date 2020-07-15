@@ -21,3 +21,7 @@ const options = {
 };
 
 const book = $("#flipbook").FlipBook(options);
+
+var home = () => {
+  book.ctrl.goToPage(2)
+}
