@@ -9,10 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "font-awesome": "^4.7.0",
-    "html2canvas": "^1.0.0-rc.5",
-    "jquery": "^3.5.1",
-    "pdfjs-dist": "^2.4.456",
-    "three": "^0.117.1"
+    "font-awesome": "^4.7.0"
   }
 }
