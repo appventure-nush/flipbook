@@ -1,4 +1,11 @@
-FROM smuellner/alpine-lighttpd
+FROM busybox:musl AS deploy
 
-COPY --chown=www:www . /var/www
-COPY --chown=www:www lighttpd.conf /etc/lighttpd/lighttpd.conf
+EXPOSE 80
+
+RUN adduser -D static
+USER static
+WORKDIR /home/static
+
+COPY . /data/www
+RUN mv /data/www/httpd.conf /data
+CMD ["busybox", "httpd", "-f", "-v", "-p", "80", "-h", "/data/www", "-c", "/data/httpd.conf"]
