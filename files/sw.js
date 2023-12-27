@@ -2,14 +2,15 @@
 //It handles caching and PWA
 
 
-const version = "1.0.0";
+const version = "v1";
+const cacheName = `cache-${version}`;
 
 console.log(`Service worker version ${version}`);
 self.addEventListener('install', function (e) {
   console.log(`Installed service worker version ${version}`);
   e.waitUntil((async () => {
     await self.skipWaiting();
-    return caches.open('cache1').then(function (cache) {
+    return caches.open(cacheName).then(function (cache) {
       const cacheArray = [
         "./assets/js/3dflipbook.min.js",
         "./assets/js/jquery.min.js",
@@ -27,8 +28,10 @@ self.addEventListener('install', function (e) {
         "./assets/images/dark-loader.gif",
         "./assets/images/light-loader.gif",
         "./index.html",
-        "./node_modules/font-awesome/css/font-awesome.css",
-        "./node_modules/font-awesome/fonts/fontawesome-webfont.eot"
+        "./assets/css/fontawesome.min.css",
+        "./assets/css/solid.min.css",
+        "./assets/webfonts/fa-solid-900.ttf",
+        "./assets/webfonts/fa-solid-900.woff2",
       ];
       return cache.addAll(cacheArray);
     });
@@ -43,7 +46,8 @@ function addCacheHeader(response) {
   if (response.status != 200 || response.type == "opaque") {
     return response;
   }
-  if ((response.url.endsWith(".css") || response.url.endsWith(".ttf") || response.url.indexOf("min") > -1 || response.url.indexOf("io") > -1) && response) {
+  // cache everything
+  if (response) {
     const newHeaders = new Headers(response.headers);
     newHeaders.append("Cache-Control", "public, max-age=31536000");
     const newResponse = new Response(response.body, {
@@ -57,19 +61,26 @@ function addCacheHeader(response) {
   }
 }
 
-self.addEventListener('activate', event => {
+const deleteOldCaches = async () => {
+  const cacheKeepList = [cacheName];
+  const keyList = await caches.keys();
+  const cachesToDelete = keyList.filter((key) => !cacheKeepList.includes(key));
+  console.log(`Deleting ${cachesToDelete.length} old caches`)
+  await Promise.all(cachesToDelete.map(deleteCache));
+};
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(deleteOldCaches());
   event.waitUntil(self.clients.claim());
 });
+
 self.addEventListener('fetch', function (event) {
-  if (event.request.url.includes("?code") || event.request.url.includes("sw.js") || event.request.url.includes("authorize")) {
-    return false;
-  }
   if (event.request.method === "GET") {
     event.respondWith(
-      caches.open('cache1').then(async function (cache) {
+      caches.open(cacheName).then(async function (cache) {
         return cache.match(event.request).then(function (response) {
           const {url} = event.request;
-          if ((url.endsWith(".css") || url.endsWith(".eot") || url.indexOf("min") > -1 || url.indexOf("io") > -1) && response) {
+          if (response) {
             return addCacheHeader(response);
           }
           console.log(`Loading ${url}`);

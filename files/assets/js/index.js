@@ -22,7 +22,10 @@ const options = {
     },
     links: [{
       rel: 'stylesheet',
-      href: './node_modules/font-awesome/css/font-awesome.css'
+      href: './assets/css/fontawesome.min.css'
+    },{
+      rel: 'stylesheet',
+      href: './assets/css/solid.min.css'
     }],
     script: './assets/templates/default-book-view.js',
   }
