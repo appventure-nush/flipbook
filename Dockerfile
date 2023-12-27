@@ -7,5 +7,5 @@ USER static
 WORKDIR /home/static
 
 COPY . /data/www
-RUN mv /data/www/httpd.conf /data
+RUN mv /data/www/httpd.conf /data/httpd.conf
 CMD ["busybox", "httpd", "-f", "-v", "-p", "80", "-h", "/data/www", "-c", "/data/httpd.conf"]
