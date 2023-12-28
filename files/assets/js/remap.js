@@ -1,3 +1,3 @@
 window.PDFJS_LOCALE = {
-  pdfJsWorker: './assets/js/pdf.worker.js',
+  pdfJsWorker: "./assets/js/pdf.worker.js",
 };

@@ -1,0 +1,37 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  background-color: black;
+}
+
+.nav-link {
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nav-link:visited {
+  color: white;
+}
+
+.nav-link:hover {
+  background-color: dimgrey;
+}
+
+.nav-link:active {
+  background-color: dimgrey;
+}
+
+.active-nav-link {
+  background-color: dimgrey;
+}
