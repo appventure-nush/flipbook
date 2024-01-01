@@ -3,3 +3,4 @@
 
 .venv
 scripts/*.pdf
+!scripts/house.pdf

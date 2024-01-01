@@ -1,10 +1,10 @@
 from pikepdf import Pdf, ObjectStreamMode, settings
 from tqdm import tqdm
 
-settings.set_flate_compression_level(9)
+INPUT_PDF = "Yearbook-2021-icons.pdf"
+OUTPUT_PDF = "Yearbook-2021-opt.pdf"
 
-INPUT_PDF = "Yearbook-2020.pdf"
-OUTPUT_PDF = "Yearbook-2020-opt.pdf"
+settings.set_flate_compression_level(9)
 
 with Pdf.open(INPUT_PDF) as pdf:
     with tqdm(total=100, unit="%") as pbar:

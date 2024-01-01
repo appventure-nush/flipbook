@@ -1,4 +1,4 @@
-const validFlipbooks = ["2020", "2019", "2018"];
+const validFlipbooks = ["2021", "2020", "2019", "2018"];
 let flipBook =
   location.search.length === 0
     ? validFlipbooks[0]
@@ -13,9 +13,9 @@ document.title = `NUSH Year Book ${flipBook}`;
 $(`#nav-${flipBook}`).addClass("active-nav-link");
 
 const options = {
-  pdf: `./assets/Yearbook-${flipBook}.pdf`,
+  pdf: `./assets/pdfs/Yearbook-${flipBook}.pdf`,
   controlsProps: {
-    downloadURL: `./assets/Yearbook-${flipBook}.pdf`,
+    downloadURL: `./assets/pdfs/Yearbook-${flipBook}.pdf`,
   },
   template: {
     html: "./assets/templates/default-book-view.html",
