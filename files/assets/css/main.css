@@ -19,7 +19,22 @@ body {
   display: flex;
   width: 100%;
   justify-content: center;
+  align-items: center;
   background-color: black;
+}
+
+.nav-label {
+  color: white;
+  font-weight: bold;
+  margin: 0;
+  padding: 8px;
+  text-decoration: none;
+}
+
+.nav-spacer {
+  background-color: white;
+  padding: 12px 0.5px;
+  margin: 8px;
 }
 
 .nav-link {
