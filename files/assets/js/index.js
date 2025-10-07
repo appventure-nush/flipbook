@@ -1,4 +1,4 @@
-const validFlipbooks = ["2021", "2020", "15-anniversary", "2019", "2018", "10-anniversary"];
+const validFlipbooks = ["15-anniversary", "10-anniversary"] // ["2021", "2020", "15-anniversary", "2019", "2018", "10-anniversary"];
 let flipBook =
   location.search.length === 0
     ? validFlipbooks[0]
