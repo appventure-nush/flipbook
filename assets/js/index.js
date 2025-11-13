@@ -1,4 +1,4 @@
-const validFlipbooks = ["20-anniversary", "15-anniversary", "10-anniversary"];
+const validFlipbooks = ["convo", "20-anniversary", "15-anniversary", "10-anniversary"];
 let flipBook =
   location.search.length === 0
     ? validFlipbooks[0]
@@ -8,6 +8,7 @@ if (!validFlipbooks.includes(flipBook)) {
 }
 
 const flipbookNames = {
+  "convo": "NUSH Convocation Booklet 2025",
   "20-anniversary": "NUSH 20th Anniversary Book",
   "2021": "NUSH Yearbook 2021",
   "2020": "NUSH Yearbook 2020",
@@ -27,6 +28,11 @@ const options = {
   pdf: `${digitalOceanBaseURL}/${flipBook}.pdf`,
   controlsProps: {
     downloadURL: `${digitalOceanBaseURL}/${flipBook}.pdf`,
+    actions: {
+      cmdSinglePage: {
+        activeForMobile: true
+      }
+    }
   },
   template: {
     html: "./assets/templates/default-book-view.html",
