@@ -16,6 +16,9 @@ Flipbooks are stored on DigitalOcean Spaces, with CDN enabled for quick and scal
 - Look into how we got the paid version of the plugin and see if we can get the product key/latest version?
 - Probably fix CORS, idk feels kinda scuffed allowing all right now
 
+## NOTE TO CONTRIBUTORS 
+To make the changes reflect on the [https://flipbook.nush.app](https://flipbook.nush.app/) website, please bring the changes to the ```digitalocean``` branch (either through direct commits, or a pull request, or any other possible methods); then, DigitalOcean will start building it as a new deployment. 
+
 ## Tutorials
 ### How do I upload a new flipbook?
 1. Set a unique identifier for your flipbook. Usually, this is an easy-to-remember, alphanumeric, no-spaces string, like `20-anniversary`.
