@@ -25,7 +25,8 @@ const options = {
     downloadURL: `${digitalOceanBaseURL}/${flipBook}.pdf`,
     actions: {
       cmdSinglePage: {
-        activeForMobile: true
+        active: false, 
+        activeForMobile: false
       }
     }
   },
