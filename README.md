@@ -40,6 +40,7 @@ To make the changes reflect on the [https://flipbook.nush.app](https://flipbook.
 The hardest part to explain would probably be configuring the flipbook library. But it's also not too difficult - edit the `options` object with the options
 found at https://3dflipbook.net/documentation. The biggest change I did was enable single-page view instead of two-page view (known as smart pan for some reason
 it aint smart), which is passed under `controlsProps`. Check out https://3dflipbook.net/controls-customization for reference.  
+The mobile navbar also includes a fullscreen button using the browser Fullscreen API, with legacy vendor-prefixed fallbacks.
 
 You may also want to look into using tools like GhostScript to optimize PDF sizes, in case they're too big. But in most cases file size isn't a concern, since
 aesthetics is likely more important.

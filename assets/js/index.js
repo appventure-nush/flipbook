@@ -59,3 +59,74 @@ const book = $("#flipbook").FlipBook(options);
 var home = () => {
   book.ctrl.goToPage(2);
 };
+
+const fullscreenButton = document.querySelector("#fullscreen-button");
+const fullscreenTarget = document.querySelector(".main");
+
+const getFullscreenElement = () =>
+  document.fullscreenElement ||
+  document.webkitFullscreenElement ||
+  document.msFullscreenElement;
+
+const updateFullscreenButton = () => {
+  const isFullscreen = Boolean(getFullscreenElement());
+  fullscreenButton.textContent = isFullscreen ? "Exit full screen" : "Full screen";
+  fullscreenButton.setAttribute(
+    "aria-label",
+    isFullscreen ? "Exit full screen" : "Enter full screen",
+  );
+  fullscreenButton.setAttribute("aria-pressed", String(isFullscreen));
+};
+
+const requestFullscreen = () => {
+  const request =
+    fullscreenTarget.requestFullscreen ||
+    fullscreenTarget.webkitRequestFullscreen ||
+    fullscreenTarget.msRequestFullscreen;
+
+  if (!request) {
+    console.error("Fullscreen mode is not supported by this browser.");
+    return;
+  }
+
+  const result = request.call(fullscreenTarget);
+  if (result && typeof result.catch === "function") {
+    result.catch((error) => {
+      console.error("Unable to enter fullscreen mode.", error);
+    });
+  }
+};
+
+const exitFullscreen = () => {
+  const exit =
+    document.exitFullscreen ||
+    document.webkitExitFullscreen ||
+    document.msExitFullscreen;
+
+  if (!exit) {
+    console.error("Exiting fullscreen mode is not supported by this browser.");
+    return;
+  }
+
+  const result = exit.call(document);
+  if (result && typeof result.catch === "function") {
+    result.catch((error) => {
+      console.error("Unable to exit fullscreen mode.", error);
+    });
+  }
+};
+
+fullscreenButton.addEventListener("click", () => {
+  if (getFullscreenElement()) {
+    exitFullscreen();
+  } else {
+    requestFullscreen();
+  }
+});
+
+["fullscreenchange", "webkitfullscreenchange", "MSFullscreenChange"].forEach(
+  (eventName) => {
+    document.addEventListener(eventName, updateFullscreenButton);
+  },
+);
+updateFullscreenButton();

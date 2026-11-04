@@ -58,3 +58,24 @@ body {
 .active-nav-link {
   background-color: dimgrey;
 }
+
+.fullscreen-button {
+  display: none;
+  border: 0;
+  color: white;
+  background-color: transparent;
+  font: inherit;
+  padding: 8px;
+}
+
+.fullscreen-button:hover,
+.fullscreen-button:focus-visible {
+  background-color: dimgrey;
+  cursor: pointer;
+}
+
+@media (max-width: 600px), (pointer: coarse) {
+  .fullscreen-button {
+    display: block;
+  }
+}
