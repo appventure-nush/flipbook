@@ -1,4 +1,6 @@
-const validFlipbooks = ["20-anniversary", "15-anniversary", "10-anniversary"];
+const validFlipbooks = ["20-anniversary", "15-anniversary", "10-anniversary", 
+  "convo2026"
+];
 let flipBook =
   location.search.length === 0
     ? validFlipbooks[0]
@@ -8,6 +10,7 @@ if (!validFlipbooks.includes(flipBook)) {
 }
 
 const flipbookNames = {
+  "convo2026": "2026 NUSH Convocation Book", 
   "20-anniversary": "NUSH 20th Anniversary Book",
   "15-anniversary": "NUSH 15th Anniversary Book",
   "10-anniversary": "NUSH 10th Anniversary Book"

@@ -2,7 +2,7 @@
 
 The NUSH Flipbook project aims to provide a flipbook-like interface to display PDF files.  
 
-This project was created by Jun Rong (Class of 2022), with contributions from Wenkai (Class of 2024) and Yue Heng (Class of 2025).  
+This project was created by Jun Rong (Class of 2022), with contributions from Wenkai (Class of 2024), Yue Heng (Class of 2025). and Simu (Class of 2026). 
 
 ## Overview
 The site is an extremely simple static site, functioning as a wrapper around the [3dflipbook](https://3dflipbook.net/getting-started) JS library.
