@@ -6,6 +6,10 @@
   height: 100%;
 }
 
+#flipbook {
+  min-height: 0;
+}
+
 html,
 body {
   margin: 0;

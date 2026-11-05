@@ -60,6 +60,20 @@ var home = () => {
   book.ctrl.goToPage(2);
 };
 
+let resizeTimers = [];
+const refreshFlipbookLayout = () => {
+  resizeTimers.forEach((timer) => clearTimeout(timer));
+  const resize = () => {
+    if (book.view && typeof book.view.onResize === "function") {
+      book.view.onResize();
+    }
+  };
+  resizeTimers = [setTimeout(resize, 100), setTimeout(resize, 500)];
+};
+
+window.addEventListener("resize", refreshFlipbookLayout);
+window.addEventListener("orientationchange", refreshFlipbookLayout);
+
 const fullscreenButton = document.querySelector("#fullscreen-button");
 const fullscreenTarget = document.querySelector(".main");
 const fullscreenRequest =
