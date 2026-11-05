@@ -1,3 +1,5 @@
+# USE DIGITALOCEAN BRANCH INSTEAD
+
 # NUSH Flipbook
 
 The NUSH Flipbook project aims to provide a flipbook-like interface to display PDF files.  
