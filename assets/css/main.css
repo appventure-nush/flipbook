@@ -75,7 +75,7 @@ body {
 }
 
 @media (max-width: 600px), (pointer: coarse) {
-  .fullscreen-button {
+  .fullscreen-button.supported {
     display: block;
   }
 }

@@ -62,6 +62,17 @@ var home = () => {
 
 const fullscreenButton = document.querySelector("#fullscreen-button");
 const fullscreenTarget = document.querySelector(".main");
+const fullscreenRequest =
+  fullscreenTarget.requestFullscreen ||
+  fullscreenTarget.webkitRequestFullscreen ||
+  fullscreenTarget.msRequestFullscreen;
+const fullscreenExit =
+  document.exitFullscreen ||
+  document.webkitExitFullscreen ||
+  document.msExitFullscreen;
+const supportsFullscreen =
+  typeof fullscreenRequest === "function" &&
+  typeof fullscreenExit === "function";
 
 const getFullscreenElement = () =>
   document.fullscreenElement ||
@@ -79,17 +90,7 @@ const updateFullscreenButton = () => {
 };
 
 const requestFullscreen = () => {
-  const request =
-    fullscreenTarget.requestFullscreen ||
-    fullscreenTarget.webkitRequestFullscreen ||
-    fullscreenTarget.msRequestFullscreen;
-
-  if (!request) {
-    console.error("Fullscreen mode is not supported by this browser.");
-    return;
-  }
-
-  const result = request.call(fullscreenTarget);
+  const result = fullscreenRequest.call(fullscreenTarget);
   if (result && typeof result.catch === "function") {
     result.catch((error) => {
       console.error("Unable to enter fullscreen mode.", error);
@@ -98,17 +99,7 @@ const requestFullscreen = () => {
 };
 
 const exitFullscreen = () => {
-  const exit =
-    document.exitFullscreen ||
-    document.webkitExitFullscreen ||
-    document.msExitFullscreen;
-
-  if (!exit) {
-    console.error("Exiting fullscreen mode is not supported by this browser.");
-    return;
-  }
-
-  const result = exit.call(document);
+  const result = fullscreenExit.call(document);
   if (result && typeof result.catch === "function") {
     result.catch((error) => {
       console.error("Unable to exit fullscreen mode.", error);
@@ -116,17 +107,20 @@ const exitFullscreen = () => {
   }
 };
 
-fullscreenButton.addEventListener("click", () => {
-  if (getFullscreenElement()) {
-    exitFullscreen();
-  } else {
-    requestFullscreen();
-  }
-});
+if (supportsFullscreen) {
+  fullscreenButton.classList.add("supported");
+  fullscreenButton.addEventListener("click", () => {
+    if (getFullscreenElement()) {
+      exitFullscreen();
+    } else {
+      requestFullscreen();
+    }
+  });
 
-["fullscreenchange", "webkitfullscreenchange", "MSFullscreenChange"].forEach(
-  (eventName) => {
-    document.addEventListener(eventName, updateFullscreenButton);
-  },
-);
-updateFullscreenButton();
+  ["fullscreenchange", "webkitfullscreenchange", "MSFullscreenChange"].forEach(
+    (eventName) => {
+      document.addEventListener(eventName, updateFullscreenButton);
+    },
+  );
+  updateFullscreenButton();
+}
